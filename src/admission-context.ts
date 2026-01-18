@@ -1,6 +1,6 @@
 import type {
   JsonPatchOp,
-} from "./deps.ts";
+} from "@cloudydeno/kubernetes-apis/common.ts";
 
 import type {
   AdmissionRequest, AdmissionResponse,
@@ -26,8 +26,8 @@ export class AdmissionContext {
   }
   response: AdmissionResponse;
 
-  jsonPatches = new Array<JsonPatchOp>();
-  addPatch(patch: JsonPatchOp) {
+  jsonPatches: Array<JsonPatchOp> = [];
+  addPatch(patch: JsonPatchOp): void {
     this.jsonPatches.push(patch);
   }
 
@@ -39,9 +39,9 @@ export class AdmissionContext {
     return this.response;
   }
 
-  async applyHooks(rules: WebhookRule[]) {
+  async applyHooks(rules: WebhookRule[]): Promise<void> {
     for (const hook of rules) {
-      if (!hook.operations.includes(this.request.operation as any)) continue;
+      if (!hook.operations.includes(this.request.operation as "CREATE")) continue;
       if (!hook.apiGroups.includes(this.request.resource.group)) continue;
       if (!hook.apiVersions.includes(this.request.resource.version)) continue;
       if (!hook.resources.includes(this.request.resource.resource)) continue;
@@ -49,7 +49,7 @@ export class AdmissionContext {
     }
   }
 
-  log(...args: unknown[]) {
+  log(...args: unknown[]): void {
     const { group, version, resource } = this.request.resource;
     const { operation, namespace, name } = this.request;
     console.log(operation,

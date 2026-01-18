@@ -1,0 +1,6 @@
+{
+  "workspace": [
+    "examples/annotate-configmaps",
+    "src"
+  ]
+}

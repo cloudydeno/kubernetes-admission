@@ -1,0 +1,73 @@
+{
+  "version": "5",
+  "specifiers": {
+    "jsr:@cloudydeno/kubernetes-apis@0.7": "0.7.0",
+    "jsr:@cloudydeno/kubernetes-client@0.8": "0.8.0",
+    "jsr:@cloudydeno/opentelemetry@0.11": "0.11.0",
+    "jsr:@std/encoding@1": "1.0.10",
+    "jsr:@std/internal@^1.0.12": "1.0.12",
+    "jsr:@std/path@1": "1.1.4",
+    "jsr:@std/streams@1": "1.0.16",
+    "jsr:@std/yaml@1": "1.0.10"
+  },
+  "jsr": {
+    "@cloudydeno/kubernetes-apis@0.7.0": {
+      "integrity": "2f9bfc1fee1ed997065cebd04b6b022a425fb754ff5a440b331c0a13e4d3bb63",
+      "dependencies": [
+        "jsr:@cloudydeno/kubernetes-client"
+      ]
+    },
+    "@cloudydeno/kubernetes-client@0.8.0": {
+      "integrity": "08066abfc8f7bb17f6a81f727af1d609dc19a11b14a6c941a52bf11f7a6aea36",
+      "dependencies": [
+        "jsr:@std/path",
+        "jsr:@std/streams",
+        "jsr:@std/yaml"
+      ]
+    },
+    "@cloudydeno/opentelemetry@0.11.0": {
+      "integrity": "a7be5d86697b1e733639b73e16758f469fb104f887280b87792dc4e39100fe09"
+    },
+    "@std/encoding@1.0.10": {
+      "integrity": "8783c6384a2d13abd5e9e87a7ae0520a30e9f56aeeaa3bdf910a3eaaf5c811a1"
+    },
+    "@std/internal@1.0.12": {
+      "integrity": "972a634fd5bc34b242024402972cd5143eac68d8dffaca5eaa4dba30ce17b027"
+    },
+    "@std/path@1.1.4": {
+      "integrity": "1d2d43f39efb1b42f0b1882a25486647cb851481862dc7313390b2bb044314b5",
+      "dependencies": [
+        "jsr:@std/internal"
+      ]
+    },
+    "@std/streams@1.0.16": {
+      "integrity": "85030627befb1767c60d4f65cb30fa2f94af1d6ee6e5b2515b76157a542e89c4"
+    },
+    "@std/yaml@1.0.10": {
+      "integrity": "245706ea3511cc50c8c6d00339c23ea2ffa27bd2c7ea5445338f8feff31fa58e"
+    }
+  },
+  "remote": {
+    "https://deno.land/x/kubernetes_apis@v0.3.2/builtin/core@v1/structs.ts": "7d0c69be9ec291ce30caa8dad2e1a686c3e2da45f1d070f0c106457c90129f16",
+    "https://deno.land/x/kubernetes_apis@v0.3.2/builtin/meta@v1/structs.ts": "8b39daf6b6f4bee47573db02da8a745ecf98bc634c31ba8ab637b46e9c25f8a7",
+    "https://deno.land/x/kubernetes_apis@v0.3.2/common.ts": "24b92a00b971bb4628f78e606cba2ebecd9868352a53c2a9213ac65d376a919f",
+    "https://deno.land/x/kubernetes_client@v0.3.2/lib/contract.ts": "09d1ac34d8a0df21e132cd7ffc4572db8632fb1cc78d643a41603b11be75ed01",
+    "https://deno.land/x/kubernetes_client@v0.3.2/lib/stream-transformers.ts": "ba7919ab23d36cb3cc216037afd35b11850f45807ab6968a5ade3db2d70f82d9"
+  },
+  "workspace": {
+    "members": {
+      "examples/annotate-configmaps": {
+        "dependencies": [
+          "jsr:@cloudydeno/kubernetes-apis@0.7"
+        ]
+      },
+      "src": {
+        "dependencies": [
+          "jsr:@cloudydeno/kubernetes-apis@0.7",
+          "jsr:@cloudydeno/opentelemetry@0.11",
+          "jsr:@std/encoding@1"
+        ]
+      }
+    }
+  }
+}
