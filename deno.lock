@@ -47,13 +47,6 @@
       "integrity": "245706ea3511cc50c8c6d00339c23ea2ffa27bd2c7ea5445338f8feff31fa58e"
     }
   },
-  "remote": {
-    "https://deno.land/x/kubernetes_apis@v0.3.2/builtin/core@v1/structs.ts": "7d0c69be9ec291ce30caa8dad2e1a686c3e2da45f1d070f0c106457c90129f16",
-    "https://deno.land/x/kubernetes_apis@v0.3.2/builtin/meta@v1/structs.ts": "8b39daf6b6f4bee47573db02da8a745ecf98bc634c31ba8ab637b46e9c25f8a7",
-    "https://deno.land/x/kubernetes_apis@v0.3.2/common.ts": "24b92a00b971bb4628f78e606cba2ebecd9868352a53c2a9213ac65d376a919f",
-    "https://deno.land/x/kubernetes_client@v0.3.2/lib/contract.ts": "09d1ac34d8a0df21e132cd7ffc4572db8632fb1cc78d643a41603b11be75ed01",
-    "https://deno.land/x/kubernetes_client@v0.3.2/lib/stream-transformers.ts": "ba7919ab23d36cb3cc216037afd35b11850f45807ab6968a5ade3db2d70f82d9"
-  },
   "workspace": {
     "members": {
       "examples/annotate-configmaps": {
