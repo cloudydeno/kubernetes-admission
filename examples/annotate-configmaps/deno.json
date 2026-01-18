@@ -1,0 +1,5 @@
+{
+  "imports": {
+    "@cloudydeno/kubernetes-apis": "jsr:@cloudydeno/kubernetes-apis@^0.7"
+  }
+}

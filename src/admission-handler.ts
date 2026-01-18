@@ -1,13 +1,13 @@
 import {
   fromMutatingWebhookConfiguration,
   fromValidatingWebhookConfiguration,
-} from "./deps.ts";
+} from "@cloudydeno/kubernetes-apis/admissionregistration.k8s.io/v1";
 
 import {
   fromAdmissionReview, toAdmissionReview,
 } from "./admission-review.ts";
 import {
-  WebhookRule,
+  type WebhookRule,
   AdmissionContext,
 } from "./admission-context.ts";
 
@@ -32,28 +32,35 @@ export class AdmissionHandler {
       repo: string;
     },
   ) {}
-  mutatingRules = new Array<WebhookRule>();
-  validatingRules = new Array<WebhookRule>();
+  mutatingRules: Array<WebhookRule> = [];
+  validatingRules: Array<WebhookRule> = [];
   defaultWebhookConfig: Partial<DefaultWebhookConfig> = {};
 
-  withMutatingRule(rule: WebhookRule) {
+  withMutatingRule(rule: WebhookRule): this {
     this.mutatingRules.push(rule);
     return this;
   }
-  withValidatingRule(rule: WebhookRule) {
+  withValidatingRule(rule: WebhookRule): this {
     this.validatingRules.push(rule);
     return this;
   }
-  withDefaultWebhookConfig(config: Partial<DefaultWebhookConfig>) {
+  withDefaultWebhookConfig(config: Partial<DefaultWebhookConfig>): this {
     this.defaultWebhookConfig = config;
     return this;
   }
 
-  async handleRequest(request: Request) {
+  async handleRequest(request: Request): Promise<Response> {
     const {pathname, origin, hostname} = new URL(request.url);
 
     if (pathname === "/webhook-config.yaml") {
       return new Response(this.buildConfigManifest(origin, hostname));
+    }
+
+    if (pathname === "/healthz") {
+      return new Response("ok");
+    }
+    if (pathname === "/alivez") {
+      return new Response("ok");
     }
 
     if (pathname === '/') return new Response(`<!doctype html>\n<title>${origin}</title>
@@ -105,7 +112,7 @@ export class AdmissionHandler {
       }});
   }
 
-  buildConfigManifest(origin: string, hostname: string) {
+  buildConfigManifest(origin: string, hostname: string): string {
     const metadata = {
       name: this.metadata.name,
       labels: {
@@ -135,6 +142,7 @@ export class AdmissionHandler {
     }
     if (this.validatingRules.length > 0) {
       const {
+        // deno-lint-ignore no-unused-vars
         reinvocationPolicy, // Only relevant for mutating, so pull out + ignore here
         ...validatingConfig
       } = baseConfig;

@@ -1,9 +1,15 @@
 import {
-  Base64,
-  c,
-  Status, fromStatus, toStatus,
-  UserInfo, fromUserInfo, toUserInfo,
-} from "./deps.ts";
+  type UserInfo, fromUserInfo, toUserInfo,
+} from "@cloudydeno/kubernetes-apis/authentication.k8s.io/v1";
+import {
+  type Status, fromStatus, toStatus,
+} from "@cloudydeno/kubernetes-apis/meta/v1";
+import * as c from "@cloudydeno/kubernetes-apis/common.ts";
+
+import {
+  decodeBase64,
+  encodeBase64,
+} from "@std/encoding/base64";
 
 // https://github.com/kubernetes/api/blob/master/admission/v1beta1/types.go
 // This file looks like a normal /x/kubernetes_apis file, but it's actually handwritten
@@ -96,7 +102,7 @@ export function toAdmissionResponse(input: c.JSONValue): AdmissionResponse {
     uid: c.checkStr(obj["uid"]),
     allowed: c.checkBool(obj["allowed"]),
     result: c.readOpt(obj["status"], toStatus),
-    patch: c.readOpt(obj["patch"], x => Base64.decode(c.checkStr(x))),
+    patch: c.readOpt(obj["patch"], x => decodeBase64(c.checkStr(x))),
     patchType: c.readOpt(obj["patchType"], x => c.readEnum<c.UnexpectedEnumValue>(x)),
     auditAnnotations: c.readOpt(obj["auditAnnotations"], x => c.readMap(x, c.checkStr)),
     warnings: c.readOpt(obj["warnings"], x => c.readList(x, c.checkStr)),
@@ -105,7 +111,7 @@ export function fromAdmissionResponse(input: AdmissionResponse): c.JSONValue {
   return {
     ...input,
     result: input.result != null ? fromStatus(input.result) : undefined,
-    patch: input.patch != null ? Base64.encode(input.patch) : undefined,
+    patch: input.patch != null ? encodeBase64(input.patch) : undefined,
   }}
 
 

@@ -1,0 +1,12 @@
+{
+  "name": "@cloudydeno/kubernetes-admission",
+  "version": "0.2.0",
+  "exports": {
+    ".": "./mod.ts"
+  },
+  "imports": {
+    "@cloudydeno/kubernetes-apis": "jsr:@cloudydeno/kubernetes-apis@^0.7",
+    "@cloudydeno/opentelemetry": "jsr:@cloudydeno/opentelemetry@^0.11",
+    "@std/encoding": "jsr:@std/encoding@^1"
+  }
+}
