@@ -4,15 +4,15 @@ entrypoint:
   specifier: mod.ts
 
 dependencyLayers:
-- specifier: ../../src/deps.ts
-- specifier: ../../src/mod.ts
-- specifier: https://deno.land/x/kubernetes_apis@v0.3.2/builtin/core@v1/structs.ts
+- specifier: '@cloudydeno/kubernetes-apis/core/v1'
+- specifier: '@cloudydeno/kubernetes-admission'
 
 runtimeFlags:
 - --allow-net
 - --allow-read=/run
 - --allow-env=WEBHOOK_TLS_DIRECTORY
 
-ejections:
+targets:
   alpine:
-    base: denoland/deno:alpine-1.18.2
+    ref: example
+    baseRef: denoland/deno:alpine-$DenoVersion
